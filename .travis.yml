@@ -9,3 +9,18 @@ before_install:
 
 script:
   - docker run -e CI=true brianmehrman/docker-react npm run test -- --coverage
+
+deploy:
+  provider: elasticbeanstalk
+  region: "us-east-1"
+  app: "udemy-docker-react"
+  env: "UdemyDockerReact-env"
+  bucket_name: "elasticbeanstalk-us-east-1-449137061885"
+  bucket_path: "udemy-docker-react"
+  on:
+    branch: master
+
+access_key_id:
+  secure: $AWS_ACCESS_KEY
+secret_access_key:
+  secure: $AWS_SECRET_KEY
